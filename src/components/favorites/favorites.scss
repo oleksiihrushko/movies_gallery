@@ -1,6 +1,26 @@
 .favorites {
-  width: 20vw;
+  width: 25vw;
   /* height: 100vh; */
   border: 1px solid gray;
-  background-color: rgb(196, 196, 196);
+  background-color: rgb(228, 228, 228);
+  padding: 2vh;
+
+  &__wrapper {
+    display: flex;
+  }
+
+  &__icon {
+    width: 40px;
+    margin-right: 2vw;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+
+    &--btn {
+      border: none;
+      background-color: transparent;
+    }
+  }
 }

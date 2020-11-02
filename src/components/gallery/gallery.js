@@ -1,13 +1,13 @@
-import { getGallery } from '../../services/api';
-import galleryItems from './galleryItems.hbs';
+import getItemsMarkup from './getItemsMarkup.hbs';
 import './gallery.scss';
+import renderFavorites from '../favorites/favorites';
 
-const renderGallery = async lsData => {
-  const result = await getGallery();
-  const markup = galleryItems(result);
-  document
-    .querySelector('.gallery__wrapper')
-    .insertAdjacentHTML('beforeend', markup);
+const renderGallery = galleryItems => {
+  const lsData = JSON.parse(localStorage.getItem('favorites'));
+  const galleryTag = document.querySelector('.gallery__wrapper');
+
+  const markup = getItemsMarkup(galleryItems);
+  galleryTag.insertAdjacentHTML('beforeend', markup);
 
   const stars = document.querySelectorAll('.item__foto svg');
 
@@ -18,27 +18,39 @@ const renderGallery = async lsData => {
       : star.firstElementChild.classList.remove('filled');
 
     star.addEventListener('click', e => {
-      favClickHandler(e.currentTarget);
+      favClickHandler(e.currentTarget, galleryItems);
     });
   });
 };
 
-const favClickHandler = star => {
-  const lsData = JSON.parse(localStorage.getItem('favorites'));
-  const inFav = lsData.find(item => item === star.dataset.id);
+const favClickHandler = (star, galleryItems) => {
+  const isInLS = toggleFavInLS(star.dataset.id);
 
+  toggleStar(isInLS, star);
+  //rerender FavoritesList
+  renderFavorites(galleryItems);
+};
+
+export const toggleFavInLS = id => {
+  const lsData = JSON.parse(localStorage.getItem('favorites'));
+  const inFav = lsData.find(item => item === id);
   if (inFav) {
     localStorage.setItem(
       'favorites',
-      JSON.stringify(lsData.filter(idx => idx !== star.dataset.id)),
+      JSON.stringify(lsData.filter(idx => idx !== id)),
     );
-    star.firstElementChild.classList.remove('filled');
   } else {
-    lsData.push(star.dataset.id);
+    lsData.push(id);
     lsData.sort((a, b) => a - b);
     localStorage.setItem('favorites', JSON.stringify(lsData));
-    star.firstElementChild.classList.add('filled');
   }
+  return inFav;
+};
+
+export const toggleStar = (isInLS, starNode) => {
+  isInLS
+    ? starNode.firstElementChild.classList.remove('filled')
+    : starNode.firstElementChild.classList.add('filled');
 };
 
 export default renderGallery;

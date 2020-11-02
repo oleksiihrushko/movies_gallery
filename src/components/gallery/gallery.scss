@@ -1,5 +1,5 @@
 .gallery {
-  width: 76vw;
+  width: 71vw;
   padding: 4vh;
   border: 1px solid gray;
 
@@ -17,20 +17,20 @@
     height: 40vh;
 
     &:not(:nth-child(4n)) {
-      margin-right: 3vw;
+      margin-right: 2vw;
     }
 
     &:not(:nth-last-child(-n + 4)) {
-      margin-bottom: 1vh;
+      margin-bottom: 2vh;
     }
   }
 }
 
 .item {
-  width: 15vw;
+  width: 14vw;
   border: 1px solid gray;
   border-radius: 50px;
-  padding: 3vw;
+  padding: 2vw;
 
   &__foto {
     position: relative;

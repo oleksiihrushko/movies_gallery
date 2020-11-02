@@ -1,0 +1,28 @@
+<div class="modal__wrapper--left">
+    <img class="modal__img" src={{img}} alt="{{name}}"
+        onerror="this.src='https://www.ufopaedia.org/images/7/75/No_image_available.png';this.onerror='';">
+    <div class="modal__wrapper--starYear">
+        <svg class="modal__star" data-id={{id}} viewBox="0 0 300 275" xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <polygon fill="#fff" stroke="#605a00" stroke-width="15" points="150,25  179,111 269,111 197,165
+                              223,251  150,200 77,251  103,165
+                              31,111 121,111" />
+        </svg>
+        <span class="modal__year">{{year}}</span>
+    </div>
+    <ul class="modal__genres">
+        {{#each genres}}
+        <li class="modal__genres--item">
+            <span>{{this}}</span>
+        </li>
+        {{/each}}
+    </ul>
+</div>
+<div class="modal__wrapper--right">
+    <button class="modal__closeBtn"></button>
+    <h2 class="modal__title">{{name}}</h2>
+    <p class="modal__descr">{{description}}</p>
+    <p class="modal__director">Director: {{director}}</p>
+    <p class="modal__starring">Starring: {{#each starring}}
+        <span class="modal__genres--starring">{{this}}{{#if @last}}{{else}},{{/if}}</span>
+        {{/each}}</p>
+</div>

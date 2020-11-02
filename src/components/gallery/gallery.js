@@ -1,6 +1,7 @@
 import getItemsMarkup from './getItemsMarkup.hbs';
 import './gallery.scss';
 import renderFavorites from '../favorites/favorites';
+import openModal from '../itemModal/itemModal';
 
 const renderGallery = galleryItems => {
   const lsData = JSON.parse(localStorage.getItem('favorites'));
@@ -18,15 +19,25 @@ const renderGallery = galleryItems => {
       : star.firstElementChild.classList.remove('filled');
 
     star.addEventListener('click', e => {
-      favClickHandler(e.currentTarget, galleryItems);
+      favClickHandler(e.currentTarget.dataset.id, galleryItems);
     });
   });
+
+  const items = document.querySelectorAll('.gallery__item');
+  items.forEach(item =>
+    item.addEventListener('click', e => {
+      if (e.target.nodeName === 'svg' || e.target.nodeName === 'polygon')
+        return;
+      openModal(e.currentTarget.dataset.itemid, galleryItems);
+    }),
+  );
 };
 
-const favClickHandler = (star, galleryItems) => {
-  const isInLS = toggleFavInLS(star.dataset.id);
+export const favClickHandler = (id, galleryItems) => {
+  const isInLS = toggleFavInLS(id);
 
-  toggleStar(isInLS, star);
+  toggleStar(isInLS, id);
+
   //rerender FavoritesList
   renderFavorites(galleryItems);
 };
@@ -47,10 +58,14 @@ export const toggleFavInLS = id => {
   return inFav;
 };
 
-export const toggleStar = (isInLS, starNode) => {
+export const toggleStar = (isInLS, id) => {
+  const starNodes = document.querySelectorAll(`[data-id="${id}"]`);
+
   isInLS
-    ? starNode.firstElementChild.classList.remove('filled')
-    : starNode.firstElementChild.classList.add('filled');
+    ? starNodes.forEach(node =>
+        node.firstElementChild.classList.remove('filled'),
+      )
+    : starNodes.forEach(node => node.firstElementChild.classList.add('filled'));
 };
 
 export default renderGallery;

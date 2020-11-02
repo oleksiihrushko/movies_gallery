@@ -1,0 +1,18 @@
+{{#each this}}
+<div class="gallery__item item">
+    <div class="item__foto">
+        <svg class="item__foto--svg" data-id={{id}} viewBox="0 0 300 275" xmlns="http://www.w3.org/2000/svg"
+            version="1.1">
+            <polygon fill="#fff" stroke="#605a00" stroke-width="15" points="150,25  179,111 269,111 197,165
+                            223,251  150,200 77,251  103,165
+                            31,111 121,111" />
+        </svg>
+        <img src="{{img}}" alt="{{name}}"
+            onerror="this.src='https://www.ufopaedia.org/images/7/75/No_image_available.png';this.onerror='';">
+    </div>
+    <div class="item__info">
+        <p class="item__info--name">{{name}}</p>
+        <p class="item__info--year">{{year}}</p>
+    </div>
+</div>
+{{/each}}

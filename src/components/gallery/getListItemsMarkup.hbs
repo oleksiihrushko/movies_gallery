@@ -1,0 +1,26 @@
+{{#each this}}
+<div data-itemid={{id}} class="gallery__listItem listItem">
+    <div class="listItem__foto">
+        <img src="{{img}}" alt="{{name}}"
+            onerror="this.src='https://www.ufopaedia.org/images/7/75/No_image_available.png';this.onerror='';">
+    </div>
+    <div class="listItem__info">
+        <span class="listItem__info--name">{{name}}</span>
+        <span class="listItem__info--year">{{year}}</span>
+        <p class="listItem__info--descr">{{description}}</p>
+        <ul class="listItem__info--genres">
+            {{#each genres}}
+            <li class="listItem__info--genresItem">
+                <span>{{this}}</span>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+    <svg class="listItem__svg starSvg" data-id={{id}} viewBox="0 0 300 275" xmlns="http://www.w3.org/2000/svg"
+        version="1.1">
+        <polygon fill="#fff" stroke="#605a00" stroke-width="15" points="150,25  179,111 269,111 197,165
+                                        223,251  150,200 77,251  103,165
+                                        31,111 121,111" />
+    </svg>
+</div>
+{{/each}}

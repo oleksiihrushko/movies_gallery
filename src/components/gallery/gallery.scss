@@ -24,6 +24,45 @@
       margin-bottom: 2vh;
     }
   }
+
+  &__listItem {
+    width: 60vw;
+    height: 20vh;
+
+    &:not(:last-child) {
+      margin-bottom: 2vh;
+    }
+  }
+
+  &__control {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2vh;
+    padding-right: 5vw;
+
+    &--view {
+      display: flex;
+      align-items: center;
+    }
+
+    &--btn {
+      width: 4vw;
+      height: 4vh;
+      border: none;
+      background-color: transparent;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      &.gridBtn {
+        background-image: url('../../images/grid.png');
+      }
+
+      &.listBtn {
+        background-image: url('../../images/list.png');
+      }
+    }
+  }
 }
 
 .item {
@@ -48,5 +87,64 @@
       max-width: 100%;
       max-height: 20vh;
     }
+  }
+}
+
+.listItem {
+  position: relative;
+  display: flex;
+  padding: 1vh 2vw;
+  border: 1px solid gray;
+  border-radius: 30px;
+
+  &__foto {
+    width: 15vw;
+    margin-right: 2vw;
+
+    & img {
+      max-width: 100%;
+      max-height: 17vh;
+    }
+  }
+
+  &__info {
+    max-width: 40vw;
+
+    &--descr {
+      margin: 2vh 0;
+      height: 18px;
+      overflow: hidden;
+    }
+
+    &--genres {
+      display: flex;
+      flex-wrap: wrap;
+      width: 35vw;
+
+      &Item {
+        width: 9vw;
+        height: 4vh;
+        text-align: center;
+        line-height: 4vh;
+        border: 1px solid gray;
+        border-radius: 10px;
+        background-color: #fff;
+
+        &:not(:last-child) {
+          margin-right: 1vw;
+        }
+
+        &:not(:nth-last-child(-n + 2)) {
+          margin-bottom: 1vh;
+        }
+      }
+    }
+  }
+
+  &__svg {
+    position: absolute;
+    top: 1vh;
+    right: 1vw;
+    width: 3vw;
   }
 }

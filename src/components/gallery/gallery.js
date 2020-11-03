@@ -1,16 +1,22 @@
-import getItemsMarkup from './getItemsMarkup.hbs';
+import getGridItemsMarkup from './getGridItemsMarkup.hbs';
+import getListItemsMarkup from './getListItemsMarkup.hbs';
 import './gallery.scss';
 import renderFavorites from '../favorites/favorites';
 import openModal from '../itemModal/itemModal';
 
 const renderGallery = galleryItems => {
   const lsData = JSON.parse(localStorage.getItem('favorites'));
+  const view = JSON.parse(localStorage.getItem('view'));
   const galleryTag = document.querySelector('.gallery__wrapper');
+  galleryTag.innerHTML = '';
 
-  const markup = getItemsMarkup(galleryItems);
+  let markup;
+  view === 'grid'
+    ? (markup = getGridItemsMarkup(galleryItems))
+    : (markup = getListItemsMarkup(galleryItems));
   galleryTag.insertAdjacentHTML('beforeend', markup);
 
-  const stars = document.querySelectorAll('.item__foto svg');
+  const stars = document.querySelectorAll('.starSvg');
 
   stars.forEach(star => {
     const inFav = lsData.find(item => item === star.dataset.id);

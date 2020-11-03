@@ -4,16 +4,20 @@ import './gallery.scss';
 import renderFavorites from '../favorites/favorites';
 import openModal from '../itemModal/itemModal';
 
-const renderGallery = galleryItems => {
+const renderGallery = (galleryItems, genreFilter) => {
   const lsData = JSON.parse(localStorage.getItem('favorites'));
   const view = JSON.parse(localStorage.getItem('view'));
   const galleryTag = document.querySelector('.gallery__wrapper');
   galleryTag.innerHTML = '';
 
+  const filteredMovies = genreFilter
+    ? galleryItems.filter(item => item.genres.includes(genreFilter))
+    : galleryItems;
+
   let markup;
   view === 'grid'
-    ? (markup = getGridItemsMarkup(galleryItems))
-    : (markup = getListItemsMarkup(galleryItems));
+    ? (markup = getGridItemsMarkup(filteredMovies))
+    : (markup = getListItemsMarkup(filteredMovies));
   galleryTag.insertAdjacentHTML('beforeend', markup);
 
   const stars = document.querySelectorAll('.starSvg');

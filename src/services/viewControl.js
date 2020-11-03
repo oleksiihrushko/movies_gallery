@@ -6,8 +6,11 @@ const addViewControl = galleryItems => {
 
   [gridBtn, listBtn].forEach(btn =>
     btn.addEventListener('click', () => {
+      const genreFilter = document.querySelector('.gallery__control--select')
+        .value;
+
       localStorage.setItem('view', JSON.stringify(btn.dataset.view));
-      renderGallery(galleryItems);
+      renderGallery(galleryItems, genreFilter);
     }),
   );
 };
